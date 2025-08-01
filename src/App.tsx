@@ -1,14 +1,14 @@
 import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
-import "./styles/app.scss";
+import "./User/styles/app.scss";
 import { lazy, Suspense } from "react";
-import Loader from "./components/Loader";
-const DashBoard = lazy(() => import("./pages/Admin/DashBoard"));
-const Products = lazy(() => import("./pages/Admin/Products"));
-const Customers = lazy(() => import("./pages/Admin/Customers"));
-const Transactions = lazy(() => import("./pages/Admin/Transactions"));
-const Home = lazy(() => import("./pages/Home"));
-const Search = lazy(() => import("./pages/Search"));
-const Cart = lazy(() => import("./pages/Cart"));
+import Loader from "./commonComponents/Loader";
+const DashBoard = lazy(() => import("./Admin/Pages/DashBoard"));
+const Products = lazy(() => import("./Admin/Pages/Products"));
+const Customers = lazy(() => import("./Admin/Pages/Customers"));
+const Transactions = lazy(() => import("./Admin/Pages/Transactions"));
+const Home = lazy(() => import("./User/pages/Home"));
+const Search = lazy(() => import("./User/pages/Search"));
+const Cart = lazy(() => import("./User/pages/Cart"));
 
 const App = () => {
   return (
