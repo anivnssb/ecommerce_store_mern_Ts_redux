@@ -1,5 +1,12 @@
+import Sidebar from "../components/Sidebar";
+
 const Transactions = () => {
-  return <div>Transactions</div>;
+  return (
+    <div className="adminContainer">
+      <Sidebar />
+      <main>skdndkn</main>
+    </div>
+  );
 };
 
 export default Transactions;
