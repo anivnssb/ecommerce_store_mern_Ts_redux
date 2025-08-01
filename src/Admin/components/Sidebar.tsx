@@ -1,12 +1,7 @@
-import type { IconType } from "react-icons";
 import { AiFillFileText } from "react-icons/ai";
 import { IoIosPeople } from "react-icons/io";
-import {
-  RiDashboardFill,
-  RiShoppingBag3Fill,
-  RiShoppingBagFill,
-} from "react-icons/ri";
-import { Link, useLocation, type Location } from "react-router-dom";
+import { RiDashboardFill, RiShoppingBag3Fill } from "react-icons/ri";
+import { Link, useLocation } from "react-router-dom";
 
 const Sidebar = () => {
   const location = useLocation();
