@@ -20,8 +20,8 @@ const Dashboard = () => {
             {...{
               heading: "Revenue",
               value: 12000,
-              percent: 15,
-              color: "rgb(0,115,255)",
+              percent: 72,
+              color: "rgb(100,285,255)",
               amount: true,
             }}
           />
@@ -29,17 +29,17 @@ const Dashboard = () => {
             {...{
               heading: "Revenue",
               value: 12000,
-              percent: 15,
-              color: "rgb(0,115,255)",
+              percent: 45,
+              color: "rgb(500,135,155)",
               amount: true,
             }}
           />
           <WidgetItem
             {...{
               heading: "Revenue",
-              value: 12000,
+              value: 1200000,
               percent: 15,
-              color: "rgb(0,115,255)",
+              color: "rgb(200,122,325)",
               amount: true,
             }}
           />
@@ -72,10 +72,20 @@ const WidgetItem = ({
           <HiTrendingUp /> +{percent} "%"
         </span>
       ) : (
-        <span className="red">
+        <span className="">
           <HiTrendingDown /> +{percent} + "%"
         </span>
       )}
+    </div>
+    <div
+      className="widgetCircle"
+      style={{
+        background: `conic-gradient(${color} ${
+          Math.abs(percent) * 3.6
+        }deg, rgb(255,255,255) 0)`,
+      }}
+    >
+      <span color={color}>{percent}%</span>
     </div>
   </article>
 );
