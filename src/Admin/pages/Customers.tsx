@@ -2,7 +2,7 @@ import Sidebar from "../components/Sidebar";
 
 const Customers = () => {
   return (
-    <div className="adminContainer">
+    <div className="admin-container">
       <Sidebar />
       <main>skdndkn</main>
     </div>

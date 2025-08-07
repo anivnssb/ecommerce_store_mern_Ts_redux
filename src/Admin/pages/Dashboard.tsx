@@ -6,7 +6,7 @@ import { HiTrendingDown, HiTrendingUp } from "react-icons/hi";
 
 const Dashboard = () => {
   return (
-    <div className="adminContainer">
+    <div className="admin-container">
       <Sidebar />
       <main className="dashboard">
         <div className="bar">
@@ -15,34 +15,52 @@ const Dashboard = () => {
           <FaRegBell />
           <img src={userImage} alt="User" />
         </div>
-        <section className="widgetcontainer">
+        <section className="widget-container">
           <WidgetItem
             {...{
               heading: "Revenue",
-              value: 12000,
-              percent: 72,
+              value: 34000,
+              percent: 40,
               color: "rgb(100,285,255)",
               amount: true,
             }}
           />
           <WidgetItem
             {...{
-              heading: "Revenue",
-              value: 12000,
-              percent: 45,
+              heading: "Users",
+              value: 400,
+              percent: -14,
+              color: "rgb(200,122,325)",
+            }}
+          />
+
+          <WidgetItem
+            {...{
+              heading: "Transactions",
+              value: 23000,
+              percent: 80,
               color: "rgb(500,135,155)",
               amount: true,
             }}
           />
           <WidgetItem
             {...{
-              heading: "Revenue",
-              value: 1200000,
-              percent: 15,
-              color: "rgb(200,122,325)",
+              heading: "Products",
+              value: 1000,
+              percent: 30,
+              color: "rgb(100,0,255)",
               amount: true,
             }}
           />
+        </section>
+        <section className="graph-container">
+          <div className="revenue-chart">
+            <h2>Revenue & Transaction</h2>
+            {/* Graph Here */}
+          </div>
+          <div className="dashboard-categories">
+            <h2>Invertory</h2>
+          </div>
         </section>
       </main>
     </div>
@@ -61,10 +79,10 @@ const WidgetItem = ({
   value,
   percent,
   color,
-  amount,
+  amount = false,
 }: widgetItemProps) => (
   <article className="widget">
-    <div className="widgetInfo">
+    <div className="widget-info">
       <p>{heading}</p>
       <h4>{amount ? `$${value}` : value}</h4>
       {percent > 0 ? (
@@ -72,13 +90,13 @@ const WidgetItem = ({
           <HiTrendingUp /> +{percent} "%"
         </span>
       ) : (
-        <span className="">
-          <HiTrendingDown /> +{percent} + "%"
+        <span className="red">
+          <HiTrendingDown /> {percent} + "%"
         </span>
       )}
     </div>
     <div
-      className="widgetCircle"
+      className="widget-circle"
       style={{
         background: `conic-gradient(${color} ${
           Math.abs(percent) * 3.6
