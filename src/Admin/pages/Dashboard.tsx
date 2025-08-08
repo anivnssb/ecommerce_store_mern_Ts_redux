@@ -3,6 +3,7 @@ import Sidebar from "../components/Sidebar";
 import { FaRegBell } from "react-icons/fa";
 import userImage from "../../assets/images/userpic.png";
 import { HiTrendingDown, HiTrendingUp } from "react-icons/hi";
+import data from "../../assets/data.json";
 
 const Dashboard = () => {
   return (
@@ -60,6 +61,16 @@ const Dashboard = () => {
           </div>
           <div className="dashboard-categories">
             <h2>Invertory</h2>
+            <div>
+              {data.categories.map((i) => (
+                <CategoryItem
+                  key={i.heading}
+                  color={`hsl(${i.value * 4},${i.value}%,50%)`}
+                  value={i.value}
+                  heading={i.heading}
+                />
+              ))}
+            </div>
           </div>
         </section>
       </main>
@@ -106,6 +117,22 @@ const WidgetItem = ({
       <span color={color}>{percent}%</span>
     </div>
   </article>
+);
+
+interface CategoryItemProps {
+  color: string;
+  value: number;
+  heading: string;
+}
+
+const CategoryItem = ({ color, value, heading }: CategoryItemProps) => (
+  <div className="category-item">
+    <h5>{heading}</h5>
+    <div>
+      <div style={{ backgroundColor: color, width: `${value}%` }}></div>
+    </div>
+    <span>{value}%</span>
+  </div>
 );
 
 export default Dashboard;
