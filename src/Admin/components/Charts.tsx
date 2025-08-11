@@ -45,7 +45,7 @@ export const BarChart = ({
 }: BarChartProps) => {
   const options: ChartOptions<"bar"> = {
     responsive: true,
-    indexAxis: horizontal ? "y" : "x",
+    indexAxis: horizontal ? "x" : "y",
     plugins: {
       legend: {
         display: false,

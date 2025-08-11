@@ -59,7 +59,6 @@ const Dashboard = () => {
           <div className="revenue-chart">
             <h2>Revenue & Transaction</h2>
             <BarChart
-              horizontal={false}
               data_1={[300, 200, 141, 500, 400, 275, 214]}
               data_2={[200, 300, 241, 400, 350, 175, 314]}
               title_1="Revenue"
