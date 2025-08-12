@@ -4,7 +4,7 @@ import { FaRegBell } from "react-icons/fa";
 import userImage from "../../assets/images/userpic.png";
 import { HiTrendingDown, HiTrendingUp } from "react-icons/hi";
 import data from "../../assets/data.json";
-import { BarChart } from "../components/Charts";
+import { BarChart, DoughnutChart } from "../components/Charts";
 import { BiMaleFemale } from "react-icons/bi";
 
 const Dashboard = () => {
@@ -94,7 +94,12 @@ const Dashboard = () => {
         <section className="transaction-container">
           <div className="gender-chart">
             <h2>Gender Ratio</h2>
-            {/* chart9 */}
+            <DoughnutChart
+              labels={["Female", "Male"]}
+              data={[12, 19]}
+              backgroundColor={["hsl(340,82%,56%)", "rgba(53,162,235,0.8)"]}
+              cutout={90}
+            />
             <p>
               <BiMaleFemale />
             </p>
