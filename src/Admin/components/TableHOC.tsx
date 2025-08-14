@@ -1,9 +1,4 @@
-import {
-  useTable,
-  type Column,
-  type Row,
-  type TableOptions,
-} from "react-table";
+import { useTable, type Column, type TableOptions } from "react-table";
 
 function TableHOC<T extends Object>(
   columns: Column<T>[],
@@ -30,7 +25,18 @@ function TableHOC<T extends Object>(
               </tr>
             ))}
           </thead>
-          <tbody></tbody>
+          <tbody {...getTableBodyProps()}>
+            {rows.map((row) => {
+              prepareRow(row);
+              return (
+                <tr {...row.getRowProps()}>
+                  {row.cells.map((cell) => (
+                    <td {...cell.getCellProps()}>{cell.render("Cell")}</td>
+                  ))}
+                </tr>
+              );
+            })}
+          </tbody>
         </table>
       </div>
     );
