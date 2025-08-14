@@ -6,7 +6,7 @@ import { HiTrendingDown, HiTrendingUp } from "react-icons/hi";
 import data from "../../assets/data.json";
 import { BarChart, DoughnutChart } from "../components/Charts";
 import { BiMaleFemale } from "react-icons/bi";
-import Table from "../components/DashboardTable";
+import Table from "../components/Table";
 
 const Dashboard = () => {
   return (

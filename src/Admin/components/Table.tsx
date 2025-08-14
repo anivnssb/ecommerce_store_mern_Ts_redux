@@ -15,7 +15,7 @@ const columns: Column<DataType>[] = [
   { Header: "Status", accessor: "status" },
 ];
 
-const DashboardTable = ({ data = [] }: { data: DataType[] }) => {
+const Table = ({ data = [] }: { data: DataType[] }) => {
   return TableHOC<DataType>(
     columns,
     data,
@@ -24,4 +24,4 @@ const DashboardTable = ({ data = [] }: { data: DataType[] }) => {
   )();
 };
 
-export default DashboardTable;
+export default Table;
