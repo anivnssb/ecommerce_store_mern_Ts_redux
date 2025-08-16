@@ -1,4 +1,4 @@
-import { useState, type ReactElement } from "react";
+import { useCallback, useState, type ReactElement } from "react";
 import Sidebar from "../components/Sidebar";
 import TableHOC from "../components/TableHOC";
 import type { Column } from "react-table";
@@ -54,12 +54,9 @@ const arr: DataType[] = [
 ];
 const Customers = () => {
   const [data] = useState<DataType[]>(arr);
-  const Table = TableHOC(
-    columns,
-    data,
-    "dashboard-product-box",
-    "Customers",
-    true
+  const Table = useCallback(
+    TableHOC(columns, data, "dashboard-product-box", "Customers", true),
+    []
   );
   return (
     <div className="admin-container">
