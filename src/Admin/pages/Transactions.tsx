@@ -27,7 +27,7 @@ const arr: DataType[] = [
     discount: 4,
     quantity: 3,
     status: <span className="red">Processing</span>,
-    action: <Link to="/admin/product/sajknaskd">Manage</Link>,
+    action: <Link to="/admin/transaction/id">Manage</Link>,
   },
   {
     name: "Puma xavier",
@@ -35,7 +35,7 @@ const arr: DataType[] = [
     discount: 4,
     quantity: 3,
     status: <span className="green">Shipped</span>,
-    action: <Link to="/admin/product/sajknaskd">Manage</Link>,
+    action: <Link to="/admin/transaction/id">Manage</Link>,
   },
 ];
 const Transactions = () => {

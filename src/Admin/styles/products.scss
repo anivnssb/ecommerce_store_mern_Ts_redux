@@ -17,3 +17,56 @@
     opacity: 0.8;
   }
 }
+
+.product-management {
+  // @include flex(row, center, unset);
+  > article {
+    margin: auto;
+    height: 85vh;
+    padding: 2rem;
+    width: 100%;
+    max-width: 400px;
+    background-color: white;
+    border-radius: 5px;
+    box-shadow: 5px 5px 10px rgba(0, 0, 0, 0.216);
+    > form {
+      @include flex(column, unset, center, 2rem);
+      > h2 {
+        text-transform: uppercase;
+        letter-spacing: 2x;
+      }
+      > img {
+        @include square(5rem);
+        border-radius: 5px;
+      }
+      > div {
+        width: 100%;
+        position: relative;
+        > label {
+          position: absolute;
+          left: 0;
+          top: -1.5rem;
+        }
+        > input {
+          @include inuptStyle(
+            100%,
+            1rem,
+            unset,
+            1px solid rgba(13, 13, 13, 0.196)
+          );
+          border-radius: 5px;
+        }
+      }
+      > button {
+        padding: 1rem;
+        border: none;
+        background-color: rgba(5, 107, 224);
+        color: white;
+        width: 100%;
+        border-radius: 5px;
+        font-size: 1.1rem;
+        cursor: pointer;
+      }
+    }
+  }
+}
