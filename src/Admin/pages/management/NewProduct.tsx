@@ -11,8 +11,14 @@ const NewProduct = () => {
     const file: File | undefined = e.target.files?.[0];
     const reader: FileReader = new FileReader();
     if (file) {
+      reader.readAsDataURL(file);
+      reader.onloadend = () => {
+        console.log(reader.result);
+        if (typeof reader.result === "string") setPhoto(reader.result);
+      };
     }
   };
+
   return (
     <div className="admin-container">
       <Sidebar />
@@ -59,7 +65,6 @@ const NewProduct = () => {
                 required
                 type="file"
                 id="photo"
-                value={photo}
                 onChange={changeImageHandler}
               />
             </div>
