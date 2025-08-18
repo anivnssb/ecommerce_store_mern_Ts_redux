@@ -108,3 +108,14 @@
     }
   }
 }
+.transaction-product-card {
+  @include flex(row, unset, center, 1rem);
+  > img {
+    @include square(4rem);
+    object-fit: cover;
+    border-radius: 5px;
+  }
+  > span {
+    margin-left: auto;
+  }
+}

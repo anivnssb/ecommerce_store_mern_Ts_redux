@@ -52,8 +52,9 @@ const ProductManagement = () => {
           <form onSubmit={submitHandler}>
             <h2>Manage</h2>
             <div>
-              <label>Name</label>
+              <label htmlFor="prod_name">Name</label>
               <input
+                id="prod_name"
                 required
                 type="text"
                 placeholder="Name"
@@ -62,8 +63,9 @@ const ProductManagement = () => {
               />
             </div>
             <div>
-              <label>Price</label>
+              <label htmlFor="prod_price">Price</label>
               <input
+                id="prod_price"
                 required
                 type="number"
                 placeholder="Price"
@@ -72,8 +74,9 @@ const ProductManagement = () => {
               />
             </div>
             <div>
-              <label>Stock</label>
+              <label htmlFor="prod_stock">Stock</label>
               <input
+                id="prod_stock"
                 required
                 type="number"
                 placeholder="Stock"
@@ -83,8 +86,13 @@ const ProductManagement = () => {
             </div>
 
             <div>
-              <label>Photo</label>
-              <input required type="file" onChange={changeImageHandler} />
+              <label htmlFor="prod_photo">Photo</label>
+              <input
+                id="prod_photo"
+                required
+                type="file"
+                onChange={changeImageHandler}
+              />
             </div>
 
             {photoUpdate && <img src={photoUpdate} alt="New Image" />}
