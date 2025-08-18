@@ -62,10 +62,20 @@ const DivTwo = ({ location }: { location: Location }) => (
   <div>
     <h5>Charts</h5>
     <ul>
-      <Li url="/admin/bar" location={location} Icon={FaChartBar} text="Bar" />
-      <Li url="/admin/pie" location={location} Icon={FaChartPie} text="Pie" />
       <Li
-        url="/admin/line"
+        url="/admin/chart/bar"
+        location={location}
+        Icon={FaChartBar}
+        text="Bar"
+      />
+      <Li
+        url="/admin/chart/pie"
+        location={location}
+        Icon={FaChartPie}
+        text="Pie"
+      />
+      <Li
+        url="/admin/chart/line"
         location={location}
         Icon={FaChartLine}
         text="Line"
