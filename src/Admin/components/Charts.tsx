@@ -30,7 +30,7 @@ interface BarChartProps {
   title_2: string;
   bgColor_1: string;
   bgColor_2: string;
-  labels: string[];
+  labels?: string[];
 }
 
 const months = ["January", "February", "March", "April", "May", "June", "July"];
