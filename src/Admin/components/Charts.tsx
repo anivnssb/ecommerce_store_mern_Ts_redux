@@ -9,8 +9,11 @@ import {
   type ChartData,
   type ChartOptions,
   ArcElement,
+  PointElement,
+  LineElement,
+  Filler,
 } from "chart.js";
-import { Bar, Doughnut, Pie } from "react-chartjs-2";
+import { Bar, Doughnut, Line, Pie } from "react-chartjs-2";
 
 ChartJS.register(
   CategoryScale,
@@ -19,8 +22,13 @@ ChartJS.register(
   Title,
   Tooltip,
   Legend,
-  ArcElement
+  ArcElement,
+  PointElement,
+  LineElement,
+  Filler
 );
+
+const months = ["January", "February", "March", "April", "May", "June", "July"];
 
 interface BarChartProps {
   horizontal?: boolean;
@@ -32,8 +40,6 @@ interface BarChartProps {
   bgColor_2: string;
   labels?: string[];
 }
-
-const months = ["January", "February", "March", "April", "May", "June", "July"];
 
 export const BarChart = ({
   horizontal,
@@ -54,7 +60,6 @@ export const BarChart = ({
       },
       title: {
         display: true,
-        text: "Chart.js Bar Chart",
       },
     },
     scales: {
@@ -157,4 +162,54 @@ export const PieChart = ({
     },
   };
   return <Pie data={pieChartData} options={pieChartOptions} />;
+};
+
+interface LineChartProps {
+  data: number[];
+  label: string;
+  backgroundColor: string;
+  borderColor: string;
+  labels?: string[];
+}
+
+export const LineChart = ({
+  data = [],
+  label,
+  backgroundColor,
+  borderColor,
+  labels = months,
+}: LineChartProps) => {
+  const options: ChartOptions<"line"> = {
+    responsive: true,
+
+    plugins: {
+      legend: {
+        display: false,
+      },
+      title: {
+        display: true,
+      },
+    },
+    scales: {
+      y: {
+        beginAtZero: true,
+        grid: {
+          display: false,
+        },
+      },
+
+      x: {
+        beginAtZero: true,
+        grid: {
+          display: false,
+        },
+      },
+    },
+  };
+
+  const LineChartData: ChartData<"line", number[], string> = {
+    labels,
+    datasets: [{ fill: true, label, data, backgroundColor, borderColor }],
+  };
+  return <Line options={options} data={LineChartData} />;
 };
