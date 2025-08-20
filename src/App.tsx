@@ -7,9 +7,9 @@ const Dashboard = lazy(() => import("./pages/admin-pages/Dashboard"));
 const Products = lazy(() => import("./pages/admin-pages/Products"));
 const Customers = lazy(() => import("./pages/admin-pages/Customers"));
 const Transactions = lazy(() => import("./pages/admin-pages/Transactions"));
-const Home = lazy(() => import("./User/pages/Home"));
-const Search = lazy(() => import("./User/pages/Search"));
-const Cart = lazy(() => import("./User/pages/Cart"));
+const Home = lazy(() => import("./pages/user-pages/Home"));
+const Search = lazy(() => import("./pages/user-pages/Search"));
+const Cart = lazy(() => import("./pages/user-pages/Cart"));
 const NewProudct = lazy(
   () => import("./pages/admin-pages/management/NewProduct")
 );
