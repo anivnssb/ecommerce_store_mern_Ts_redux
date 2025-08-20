@@ -1,36 +1,106 @@
+import { DoughnutChart, PieChart } from "../../components/Charts";
 import Sidebar from "../../components/Sidebar";
-
+import data from "../../../assets/data.json";
 const PieCharts = () => {
   return (
     <div className="admin-container">
       <Sidebar />
       <main className="chart-container">
-        <h1>Pie & Dougnut Charts</h1>
+        <h1>Pie & Doughnut Charts</h1>
         <section>
-          <BarChart
-            data_1={[300, 155, 200, 400, 600, 300, 155]}
-            data_2={[210, 122, 140, 240, 500, 200, 125]}
-            title_1="Products"
-            title_2="Users"
-            bgColor_1="hsl(260,50%,30%)"
-            bgColor_2="hsl(360,50%,50%)"
-          />
-          <h2>Top Selling Product & Top Customers</h2>
+          <div>
+            <PieChart
+              labels={["Processing", "Shipped", "Delivered"]}
+              data={[12, 9, 13]}
+              backgroundColor={[
+                "hsl(110,80%,80%)",
+                "hsl(110,80%,50%)",
+                "hsl(110,40%,50%)",
+              ]}
+              offset={[0, 0, 50]}
+            />
+          </div>
+          <h2>Order Fullfillment Ratio</h2>
         </section>
         <section>
-          <BarChart
-            horizontal={true}
-            data_1={[
-              300, 155, 200, 400, 600, 355, 200, 125, 100, 200, 300, 155,
-            ]}
-            data_2={[]}
-            title_1="Products"
-            title_2=""
-            bgColor_1="hsl(180,50%,30%)"
-            bgColor_2=""
-            labels={months}
-          />
-          <h2>Orders Throughout The Year</h2>
+          <div>
+            <DoughnutChart
+              labels={["In Stock", "Out Of Stock"]}
+              data={[40, 20]}
+              backgroundColor={["hsl(269,80%,40%)", "rgb(53,162,255)"]}
+              legends={false}
+              offset={[0, 80]}
+              cutout={"70%"}
+            />
+          </div>
+          <h2>Stock Availability</h2>
+        </section>
+        <section>
+          <div>
+            <DoughnutChart
+              labels={data.categories.map((i) => i.heading)}
+              data={data.categories.map((i) => i.value)}
+              backgroundColor={data.categories.map(
+                (i) => `hsl(${i.value * 4},${i.value}%,50%)`
+              )}
+              legends={false}
+              offset={[0, 0, 0, 80]}
+            />
+          </div>
+          <h2>Product Categories Ratio</h2>
+        </section>
+        <section>
+          <div>
+            <DoughnutChart
+              labels={[
+                "Marketing Cost",
+                "Discount",
+                "Burnt",
+                "Production Cost",
+                "Net Margin",
+              ]}
+              data={[30, 18, 5, 20, 25]}
+              backgroundColor={[
+                "hsl(100,80%,40%)",
+                "hsl(19,80%,40%)",
+                "hsl(69,80%,40%)",
+                "hsl(300,80%,40%)",
+                "hsl(53,80%,40%)",
+              ]}
+              legends={false}
+              offset={[20, 30, 20, 30, 80]}
+            />
+          </div>
+          <h2>Revenue Distribution</h2>
+        </section>
+        <section>
+          <div>
+            <PieChart
+              labels={[
+                "Teenager(Below 20)",
+                "Adult (20-40)",
+                "Older (above 40)",
+              ]}
+              data={[30, 250, 70]}
+              backgroundColor={[
+                "hsl(10,80%,80%)",
+                "hsl(10,80%,50%)",
+                "hsl(10,40%,50%)",
+              ]}
+              offset={[0, 0, 50]}
+            />
+          </div>
+          <h2>User Age Group</h2>
+        </section>
+        <section>
+          <div>
+            <DoughnutChart
+              labels={["Admin", "Customers"]}
+              data={[40, 250]}
+              backgroundColor={["hsl(335,100%,38%)", "rgb(44,98,50)"]}
+              offset={[0, 80]}
+            />
+          </div>
         </section>
       </main>
     </div>
