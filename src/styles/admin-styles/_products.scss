@@ -1,14 +1,13 @@
 .dashboard-product-box {
   background-color: white;
   padding: 2rem;
-  overflow: auto;
-  @include square(100%);
+  overflow-x: auto;
+  @include square("100%");
 }
-
 .create-product-btn {
   position: fixed;
-  right: 2rem;
   top: 2rem;
+  right: 2rem;
   @include square(2.5rem);
   @include flex(row, center, center, 0);
   border-radius: 50%;
@@ -22,7 +21,6 @@
 .product-management {
   @include flex(row, center, unset);
   padding: 4rem;
-
   > section {
     overflow-y: auto;
     width: 100%;
@@ -31,30 +29,25 @@
     box-shadow: 0px 5px 5px rgba(0, 0, 0, 0.216);
     background-color: white;
     padding: 5rem;
-    @include flex(column, unset, unset, 1rem);
     position: relative;
+    @include flex(column, unset, unset, 1rem);
     border-radius: 5px;
-
     > h2 {
       @include heading(2px);
       text-align: center;
     }
-
     > img {
       @include square(100%);
       object-fit: cover;
     }
-
     > strong {
       font-weight: 300;
     }
-
     > span {
       position: absolute;
       right: 2rem;
       top: 2rem;
     }
-
     > p {
       text-align: center;
       letter-spacing: 2px;
@@ -65,8 +58,8 @@
       font-size: 2rem;
     }
   }
-
   > article {
+    margin: auto;
     height: 85vh;
     padding: 2rem;
     width: 100%;
@@ -74,20 +67,16 @@
     background-color: white;
     border-radius: 5px;
     box-shadow: 5px 5px 10px rgba(0, 0, 0, 0.216);
-
     > form {
       @include flex(column, unset, center, 2rem);
       > h2 {
         text-transform: uppercase;
-        letter-spacing: 2px;
+        letter-spacing: 2x;
       }
-
       > img {
         @include square(5rem);
-        object-fit: cover;
         border-radius: 5px;
       }
-
       > div {
         width: 100%;
         position: relative;
@@ -96,7 +85,6 @@
           left: 0;
           top: -1.5rem;
         }
-
         > input {
           @include inputStyle(
             100%,
@@ -107,11 +95,10 @@
           border-radius: 5px;
         }
       }
-
       > button {
         padding: 1rem;
         border: none;
-        background-color: rgb(5, 107, 224);
+        background-color: rgba(5, 107, 224);
         color: white;
         width: 100%;
         border-radius: 5px;
@@ -120,7 +107,6 @@
       }
     }
   }
-
   .shipping-info-card {
     > h1 {
       text-align: center;
@@ -153,7 +139,6 @@
 
 .transaction-product-card {
   @include flex(row, unset, center, 1rem);
-
   > img {
     @include square(4rem);
     object-fit: cover;
