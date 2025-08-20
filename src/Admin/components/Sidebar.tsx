@@ -1,29 +1,65 @@
+import { useEffect, useState } from "react";
 import type { IconType } from "react-icons";
 import { AiFillFileText } from "react-icons/ai";
-import {
-  FaChartBar,
-  FaChartLine,
-  FaChartPie,
-  FaGamepad,
-  FaStopwatch,
-} from "react-icons/fa";
+import { FaChartBar, FaChartLine, FaChartPie } from "react-icons/fa";
+import { HiMenuAlt4 } from "react-icons/hi";
 import { IoIosPeople } from "react-icons/io";
-import {
-  RiCoupon3Fill,
-  RiDashboardFill,
-  RiShoppingBag3Fill,
-} from "react-icons/ri";
+import { RiDashboardFill, RiShoppingBag3Fill } from "react-icons/ri";
 import { Link, useLocation, type Location } from "react-router-dom";
 
 const Sidebar = () => {
   const location = useLocation();
+
+  const [showModal, setShowModal] = useState<boolean>(false);
+  const [phoneActive, setPhoneActive] = useState<boolean>(
+    window.innerWidth < 1100
+  );
+
+  const resizeHandler = () => {
+    setPhoneActive(window.innerWidth < 1100);
+  };
+
+  useEffect(() => {
+    window.addEventListener("resize", resizeHandler);
+
+    return () => {
+      window.removeEventListener("resize", resizeHandler);
+    };
+  }, []);
+
   return (
-    <aside>
-      <h2>Logo</h2>
-      <DivOne location={location} />
-      <DivTwo location={location} />
-      <DivThree location={location} />
-    </aside>
+    <>
+      {phoneActive && (
+        <button id="hamburger" onClick={() => setShowModal(true)}>
+          <HiMenuAlt4 />
+        </button>
+      )}
+
+      <aside
+        style={
+          phoneActive
+            ? {
+                width: "20rem",
+                height: "100vh",
+                position: "fixed",
+                top: 0,
+                left: showModal ? "0" : "-20rem",
+                transition: "all 0.5s",
+              }
+            : {}
+        }
+      >
+        <h2>Logo.</h2>
+        <DivOne location={location} />
+        <DivTwo location={location} />
+
+        {phoneActive && (
+          <button id="close-sidebar" onClick={() => setShowModal(false)}>
+            Close
+          </button>
+        )}
+      </aside>
+    </>
   );
 };
 
@@ -39,9 +75,9 @@ const DivOne = ({ location }: { location: Location }) => (
       />
       <Li
         url="/admin/products"
-        location={location}
-        Icon={RiShoppingBag3Fill}
         text="Products"
+        Icon={RiShoppingBag3Fill}
+        location={location}
       />
       <Li
         url="/admin/customers"
@@ -53,7 +89,7 @@ const DivOne = ({ location }: { location: Location }) => (
         url="/admin/transactions"
         location={location}
         Icon={AiFillFileText}
-        text="Transacions"
+        text="Transactions"
       />
     </ul>
   </div>
@@ -76,34 +112,9 @@ const DivTwo = ({ location }: { location: Location }) => (
       />
       <Li
         url="/admin/chart/line"
-        location={location}
         Icon={FaChartLine}
         text="Line"
-      />
-    </ul>
-  </div>
-);
-const DivThree = ({ location }: { location: Location }) => (
-  <div>
-    <h5>Apps</h5>
-    <ul>
-      <Li
-        url="/admin/app/stopwatch"
         location={location}
-        Icon={FaStopwatch}
-        text="Stopwatch"
-      />
-      <Li
-        url="/admin/app/coupon"
-        location={location}
-        Icon={RiCoupon3Fill}
-        text="Coupon"
-      />
-      <Li
-        url="/admin/app/toss"
-        location={location}
-        Icon={FaGamepad}
-        text="Toss"
       />
     </ul>
   </div>
@@ -114,15 +125,20 @@ interface LiProps {
   text: string;
   Icon: IconType;
 }
-
-const Li = ({ url, location, text, Icon }: LiProps) => (
+const Li = ({ url, text, location, Icon }: LiProps) => (
   <li
     style={{
-      backgroundColor:
-        location.pathname === url ? "rgb(0,115,255,0.1)" : "white",
+      backgroundColor: location.pathname.includes(url)
+        ? "rgba(0,115,255,0.1)"
+        : "white",
     }}
   >
-    <Link to={url}>
+    <Link
+      to={url}
+      style={{
+        color: location.pathname.includes(url) ? "rgb(0,115,255)" : "black",
+      }}
+    >
       <Icon />
       {text}
     </Link>
