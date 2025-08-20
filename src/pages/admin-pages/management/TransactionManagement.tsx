@@ -1,87 +1,94 @@
 import { useState } from "react";
-import Sidebar from "../../components/Sidebar";
+import Sidebar from "../../../components/admin-components/Sidebar";
 import type { OrderItemType, OrderType } from "../../../types";
 import { Link } from "react-router-dom";
 
 const img =
   "https://images.unsplash.com/photo-1542291026-7eec264c27ff?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxzZWFyY2h8Mnx8c2hvZXN8ZW58MHx8MHx8&w=1000&q=804";
 
-const orderItemsArray: OrderItemType[] = [
+const orderItems: OrderItemType[] = [
   {
-    name: "Puma",
+    name: "Puma Shoes",
     photo: img,
-    price: 2000,
+    _id: "asdsaasdas",
     quantity: 4,
-    _id: "abcd123",
+    price: 2000,
   },
 ];
+
 const TransactionManagement = () => {
   const [order, setOrder] = useState<OrderType>({
-    name: "Anvin",
-    address: "MLA Road",
-    city: "North Paravoor",
-    country: "india",
-    state: "Kerala",
-    pincode: 123,
+    name: "Abhishek Singh",
+    address: "77 Black Street",
+    city: "Neyword",
+    state: "Nevada",
+    country: "India",
+    pinCode: 2434341,
     status: "Processing",
-    subtotal: 1200,
-    discount: 40,
-    shippingCharges: 20,
-    tax: 20,
-    total: 8000,
-    orderItems: orderItemsArray,
-    _id: "efgh123",
+    subtotal: 4000,
+    discount: 1200,
+    shippingCharges: 0,
+    tax: 200,
+    total: 4000 + 200 + 0 - 1200,
+    orderItems,
+    _id: "asdnasjdhbn",
   });
+
   const {
     name,
     address,
     city,
     country,
     state,
-    pincode,
-    status,
+    pinCode,
     subtotal,
-    discount,
     shippingCharges,
     tax,
+    discount,
     total,
-    orderItems,
-    _id,
+    status,
   } = order;
-  const updateHandler = () => {
+
+  const updateHander = () => {
     setOrder((prev) => ({
       ...prev,
       status: prev.status === "Processing" ? "Shipped" : "Delivered",
     }));
   };
+
   return (
     <div className="admin-container">
       <Sidebar />
       <main className="product-management">
-        <section>
+        <section
+          style={{
+            padding: "2rem",
+          }}
+        >
           <h2>Order Items</h2>
+
           {order.orderItems.map((i) => (
-            <ProductOrderCard
+            <ProductCard
               name={i.name}
               photo={i.photo}
-              price={i.price}
-              quantity={i.quantity}
               _id={i._id}
+              quantity={i.quantity}
+              price={i.price}
             />
           ))}
         </section>
-        <article>
-          <h1>Order Info</h1>
 
+        <article className="shipping-info-card">
+          <h1>Order Info</h1>
           <h5>User Info</h5>
           <p>Name: {name}</p>
           <p>
-            Address: {`${address}, ${city}, ${state}, ${country}, ${pincode}`}
+            Address: {`${address}, ${city}, ${state}, ${country} ${pinCode}`}
           </p>
 
           <h5>Amount Info</h5>
           <p>Subtotal: {subtotal}</p>
-          <p>Shipping Charges :{shippingCharges}</p>
+          <p>Shipping Charges: {shippingCharges}</p>
           <p>Tax: {tax}</p>
           <p>Discount: {discount}</p>
           <p>Total: {total}</p>
@@ -102,29 +109,21 @@ const TransactionManagement = () => {
             </span>
           </p>
 
-          <button onClick={updateHandler}>Process Status</button>
+          <button onClick={updateHander}>Process Status</button>
         </article>
       </main>
     </div>
   );
 };
 
-const ProductOrderCard = ({
-  price,
-  quantity,
-  name,
-  photo,
-  _id,
-}: OrderItemType) => {
-  return (
-    <div className="transaction-product-card">
-      <img src={photo} alt="" />
-      <Link to={`/product/${_id}`}>{name} </Link>
-      <span>
-        ${price} X {quantity}=${price * quantity}
-      </span>
-    </div>
-  );
-};
+const ProductCard = ({ name, photo, price, quantity, _id }: OrderItemType) => (
+  <div className="transaction-product-card">
+    <img src={photo} alt={name} />
+    <Link to={`/product/${_id}`}>{name}</Link>
+    <span>
+      ${price} X {quantity} = ${price * quantity}
+    </span>
+  </div>
+);
 
 export default TransactionManagement;

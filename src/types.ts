@@ -12,7 +12,7 @@ export type OrderType = {
   city: string;
   country: string;
   state: string;
-  pincode: number;
+  pinCode: number;
   status: "Processing" | "Shipped" | "Delivered";
   subtotal: number;
   discount: number;

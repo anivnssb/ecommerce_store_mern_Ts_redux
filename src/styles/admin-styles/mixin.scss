@@ -17,7 +17,7 @@
   grid-template-rows: $row;
   gap: $gap;
 }
-@mixin inuptStyle($w: 100%, $p: 1rem, $bgColor: inherit, $border: none) {
+@mixin inputStyle($w: 100%, $p: 1rem, $bgColor: inherit, $border: none) {
   width: $w;
   padding: $p;
   background-color: $bgColor;

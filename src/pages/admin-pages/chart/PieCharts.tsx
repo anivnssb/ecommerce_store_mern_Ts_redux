@@ -1,5 +1,8 @@
-import { DoughnutChart, PieChart } from "../../components/Charts";
-import Sidebar from "../../components/Sidebar";
+import {
+  DoughnutChart,
+  PieChart,
+} from "../../../components/admin-components/Charts";
+import Sidebar from "../../../components/admin-components/Sidebar";
 import data from "../../../assets/data.json";
 const PieCharts = () => {
   return (

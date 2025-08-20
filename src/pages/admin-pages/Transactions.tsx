@@ -1,7 +1,7 @@
 import { useCallback, useState, type ReactElement } from "react";
-import Sidebar from "../components/Sidebar";
+import Sidebar from "../../components/admin-components/Sidebar";
 import type { Column } from "react-table";
-import TableHOC from "../components/TableHOC";
+import TableHOC from "../../components/admin-components/TableHOC";
 import { Link } from "react-router-dom";
 
 interface DataType {

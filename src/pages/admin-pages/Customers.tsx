@@ -1,6 +1,6 @@
 import { useCallback, useState, type ReactElement } from "react";
-import Sidebar from "../components/Sidebar";
-import TableHOC from "../components/TableHOC";
+import Sidebar from "../../components/admin-components/Sidebar";
+import TableHOC from "../../components/admin-components/TableHOC";
 import type { Column } from "react-table";
 import { Link } from "react-router-dom";
 import { FaTrash } from "react-icons/fa";

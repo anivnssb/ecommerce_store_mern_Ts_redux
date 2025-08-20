@@ -1,34 +1,38 @@
 import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
-import "./User/styles/app.scss";
-import "./Admin/styles/app.scss";
+import "./styles/app.scss";
 import { lazy, Suspense } from "react";
-import Loader from "./commonComponents/Loader";
-const Dashboard = lazy(() => import("./Admin/pages/Dashboard"));
-const Products = lazy(() => import("./Admin/pages/Products"));
-const Customers = lazy(() => import("./Admin/pages/Customers"));
-const Transactions = lazy(() => import("./Admin/pages/Transactions"));
+import Loader from "./components/Loader";
+import Header from "./components/Header";
+const Dashboard = lazy(() => import("./pages/admin-pages/Dashboard"));
+const Products = lazy(() => import("./pages/admin-pages/Products"));
+const Customers = lazy(() => import("./pages/admin-pages/Customers"));
+const Transactions = lazy(() => import("./pages/admin-pages/Transactions"));
 const Home = lazy(() => import("./User/pages/Home"));
 const Search = lazy(() => import("./User/pages/Search"));
 const Cart = lazy(() => import("./User/pages/Cart"));
-const NewProudct = lazy(() => import("./Admin/pages/management/NewProduct"));
+const NewProudct = lazy(
+  () => import("./pages/admin-pages/management/NewProduct")
+);
 const TransactionManagement = lazy(
-  () => import("./Admin/pages/management/TransactionManagement")
+  () => import("./pages/admin-pages/management/TransactionManagement")
 );
 const ProductManagement = lazy(
-  () => import("./Admin/pages/management/ProductManagement")
+  () => import("./pages/admin-pages/management/ProductManagement")
 );
-const BarCharts = lazy(() => import("./Admin/pages/chart/BarCharts"));
-const PieCharts = lazy(() => import("./Admin/pages/chart/PieCharts"));
-const LineCharts = lazy(() => import("./Admin/pages/chart/LineCharts"));
+const BarCharts = lazy(() => import("./pages/admin-pages/chart/BarCharts"));
+const PieCharts = lazy(() => import("./pages/admin-pages/chart/PieCharts"));
+const LineCharts = lazy(() => import("./pages/admin-pages/chart/LineCharts"));
 
 const App = () => {
   return (
     <Router>
+      <Header />
       <Suspense fallback={<Loader />}>
         <Routes>
           <Route path="/" element={<Home />} />
           <Route path="/search" element={<Search />} />
           <Route path="/cart" element={<Cart />} />
+
           <Route path="/admin/dashboard" element={<Dashboard />} />
           <Route path="/admin/products" element={<Products />} />
           <Route path="/admin/customers" element={<Customers />} />
