@@ -28,13 +28,43 @@ $color3: rgb(0, 104, 136);
 }
 
 @import "admin-styles/mixin";
+@import "user-styles/home";
 @import "admin-styles/dashboard";
 @import "admin-styles/products";
 @import "admin-styles/chart";
 @import "admin-styles/mediaquery";
 
-.Header {
-  @include flex();
+.header {
+  padding: 1rem;
+  @include flex(row, flex-end, stretch, 1.2rem);
+  > a {
+    color: $color2;
+    letter-spacing: 2px;
+    font-size: 1.2rem;
+    &:hover {
+      color: $color3;
+    }
+  }
+  > button {
+    border: none;
+    font-size: 1.2rem;
+    cursor: pointer;
+    background: transparent;
+    &:hover {
+      color: $color3;
+    }
+  }
+  > dialog {
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    padding: 10px;
+    position: absolute;
+    left: calc(100% - 100px);
+    top: 8%;
+    > div {
+      @include flex(column, flex-start, center, 0.25rem);
+    }
+  }
 }
 
 .table {
