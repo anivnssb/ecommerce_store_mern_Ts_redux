@@ -32,10 +32,17 @@ $color3: rgb(0, 104, 136);
 @import "user-styles/cart";
 @import "user-styles/shipping";
 @import "login";
+@import "user-styles/search";
 @import "admin-styles/dashboard";
 @import "admin-styles/products";
 @import "admin-styles/chart";
 @import "admin-styles/mediaquery";
+
+.heading {
+  @include heading;
+  margin: 1rem 0;
+  text-align: center;
+}
 
 .header {
   padding: 1rem;

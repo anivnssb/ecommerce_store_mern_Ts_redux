@@ -1,6 +1,6 @@
 .cart {
   padding: 2rem 4rem;
-  @include flex(row, stretch, space-between, 4rem);
+  @include flex(row, unset, unset, 4rem);
   > main {
     width: 70%;
     > h1 {
