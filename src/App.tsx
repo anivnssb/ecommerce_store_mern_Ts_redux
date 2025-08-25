@@ -3,6 +3,7 @@ import "./styles/app.scss";
 import { lazy, Suspense } from "react";
 import Loader from "./components/Loader";
 import Header from "./components/Header";
+
 const Dashboard = lazy(() => import("./pages/admin-pages/Dashboard"));
 const Products = lazy(() => import("./pages/admin-pages/Products"));
 const Customers = lazy(() => import("./pages/admin-pages/Customers"));
@@ -12,6 +13,8 @@ const Search = lazy(() => import("./pages/user-pages/Search"));
 const Cart = lazy(() => import("./pages/user-pages/Cart"));
 const Login = lazy(() => import("./pages/Login"));
 const Shipping = lazy(() => import("./pages/user-pages/Shipping"));
+const Orders = lazy(() => import("./pages/user-pages/Orders"));
+const OrderDetail = lazy(() => import("./pages/user-pages/OrderDetail"));
 const NewProudct = lazy(
   () => import("./pages/admin-pages/management/NewProduct")
 );
@@ -43,6 +46,8 @@ const App = () => {
           {/* logged in users routes */}
           <Route>
             <Route path="/shipping" element={<Shipping />} />
+            <Route path="/orders" element={<Orders />} />
+            <Route path="/order/:id" element={<OrderDetail />} />
           </Route>
 
           {/* admin routes */}
