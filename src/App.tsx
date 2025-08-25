@@ -33,21 +33,25 @@ const App = () => {
           <Route path="/" element={<Home />} />
           <Route path="/search" element={<Search />} />
           <Route path="/cart" element={<Cart />} />
-          <Route path="/shipping" element={<Shipping />} />
+          <Route>
+            <Route path="/shipping" element={<Shipping />} />
+          </Route>
 
-          <Route path="/admin/dashboard" element={<Dashboard />} />
-          <Route path="/admin/products" element={<Products />} />
-          <Route path="/admin/customers" element={<Customers />} />
-          <Route path="/admin/transactions" element={<Transactions />} />
-          <Route path="/admin/product/new" element={<NewProudct />} />
-          <Route path="/admin/product/:id" element={<ProductManagement />} />
-          <Route
-            path="/admin/transaction/:id"
-            element={<TransactionManagement />}
-          />
-          <Route path="/admin/chart/bar" element={<BarCharts />} />
-          <Route path="/admin/chart/pie" element={<PieCharts />} />
-          <Route path="/admin/chart/line" element={<LineCharts />} />
+          <Route>
+            <Route path="/admin/dashboard" element={<Dashboard />} />
+            <Route path="/admin/products" element={<Products />} />
+            <Route path="/admin/customers" element={<Customers />} />
+            <Route path="/admin/transactions" element={<Transactions />} />
+            <Route path="/admin/product/new" element={<NewProudct />} />
+            <Route path="/admin/product/:id" element={<ProductManagement />} />
+            <Route
+              path="/admin/transaction/:id"
+              element={<TransactionManagement />}
+            />
+            <Route path="/admin/chart/bar" element={<BarCharts />} />
+            <Route path="/admin/chart/pie" element={<PieCharts />} />
+            <Route path="/admin/chart/line" element={<LineCharts />} />
+          </Route>
         </Routes>
       </Suspense>
     </Router>
