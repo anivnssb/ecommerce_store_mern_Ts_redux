@@ -1,0 +1,12 @@
+{
+  "name": "ecommerce-store-mern-ts-redux",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "type": "module",
+  "scripts": {
+    "start": ""
+  },
+  "author": "",
+  "license": "ISC"
+}
