@@ -5,6 +5,7 @@
     "module": "nodenext",
     "moduleResolution": "nodenext",
     "rootDir": "src",
-    "outDir": "dist"
+    "outDir": "dist",
+    "esModuleInterop": true
   }
 }
