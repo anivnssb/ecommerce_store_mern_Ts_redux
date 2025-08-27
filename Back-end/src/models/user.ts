@@ -17,13 +17,16 @@ interface TUser extends Document {
 
 const schema = new mongoose.Schema(
   {
-    _id: { type: String, required: [true, "Please Enter ID"] },
+    _id: {
+      type: String,
+      required: [true, "Please Enter ID"],
+    },
     name: { type: String, required: [true, "Please Enter Name"] },
     email: {
       type: String,
       unique: [true, "Email Already Exist"],
       required: [true, "Please Enter Email"],
-      validate: validator._default.isEmail,
+      validate: validator.default.isEmail,
     },
     photo: { type: String, required: [true, "Please Add Photo"] },
     role: { type: String, enum: ["admin", "user"], default: "user" },
