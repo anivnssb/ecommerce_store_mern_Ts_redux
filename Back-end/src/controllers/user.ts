@@ -31,6 +31,18 @@ export const newUser = TryCatch(async (req, res, next) => {
 export const getAllUsers = TryCatch(async (req, res, next) => {
   let users = await User.find({});
   console.log(users);
-  res.status(201).json({ succes: true, users });
+  res.status(200).json({ succes: true, users });
+  return;
+});
+
+export const getUser = TryCatch(async (req, res, next) => {
+  const id = req.params.id;
+  let user = await User.findById(id);
+  console.log(user);
+  if (!user) {
+    next(new ErrorHandler("Invalid ID", 400));
+    return;
+  }
+  res.status(200).json({ success: true, user });
   return;
 });
