@@ -12,6 +12,7 @@ app.use(express.json());
 app.get("/", (req, res) => {
   res.send("Api working with /api/v1");
 });
+
 // using routes
 app.use("/api/v1/user", userRoute);
 
