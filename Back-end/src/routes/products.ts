@@ -1,22 +1,31 @@
 import express from "express";
 import {
   newProduct,
-  getAllProduct,
-  getProduct,
+  getLatestProduct,
   deleteProduct,
+  getAllCategories,
+  getAdminProduct,
+  getSingleProduct,
 } from "../controllers/product.js";
 import { adminOnlyMiddleWare } from "../middlewares/auth.js";
+import { singleUploadMiddleWare } from "../middlewares/multer.js";
 
 const app = express.Router();
 
 // route - /api/v1/product/new
-app.post("/new", adminOnlyMiddleWare, newProduct);
+app.post("/new", adminOnlyMiddleWare, singleUploadMiddleWare, newProduct);
 
-// route - /api/v1/product/all
-app.get("/all", getAllProduct);
+// route - /api/v1/product/latest
+app.get("/latest", getLatestProduct);
+
+// route - /api/v1/product/admin-products"
+app.get("/admin-products", getAdminProduct);
+
+// route - /api/v1/product/categories
+app.get("/categories", getAllCategories);
 
 // route - /api/v1/product/dynamicID
-app.get("/:id", getProduct);
+app.get("/:id", getSingleProduct);
 app.delete("/:id", adminOnlyMiddleWare, deleteProduct);
 
 export default app;

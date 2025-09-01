@@ -18,6 +18,7 @@ app.get("/", (req, res) => {
 app.use("/api/v1/user", userRoute);
 app.use("/api/v1/product", productRoute);
 
+app.use("/uploads", express.static("uploads"));
 app.use(errorMiddleWare);
 app.listen(port, () => {
   console.log(`server is working on localhost:${port}`);
