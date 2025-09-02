@@ -6,6 +6,8 @@ import {
   getAllCategories,
   getAdminProduct,
   getSingleProduct,
+  updateProduct,
+  getAllProducts,
 } from "../controllers/product.js";
 import { adminOnlyMiddleWare } from "../middlewares/auth.js";
 import { singleUploadMiddleWare } from "../middlewares/multer.js";
@@ -24,8 +26,12 @@ app.get("/admin-products", getAdminProduct);
 // route - /api/v1/product/categories
 app.get("/categories", getAllCategories);
 
+// route - /api/v1/product/all    with filters
+app.get("/all", getAllProducts);
+
 // route - /api/v1/product/dynamicID
 app.get("/:id", getSingleProduct);
+app.put("/:id", singleUploadMiddleWare, updateProduct);
 app.delete("/:id", adminOnlyMiddleWare, deleteProduct);
 
 export default app;

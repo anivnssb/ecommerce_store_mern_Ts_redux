@@ -15,6 +15,21 @@ export interface NewProductRequestBody {
   stock: number;
 }
 
+export interface SearchQueryRequestBody {
+  search?: string;
+  price?: string;
+  category?: string;
+  stock?: string;
+  sort?: string;
+  page?: string;
+}
+
+export interface BaseQuery {
+  name?: { $regex: string; $options: string };
+  price?: { $lte: number };
+  category?: string;
+}
+
 export type ControllerType = (
   req: Request,
   res: Response,
