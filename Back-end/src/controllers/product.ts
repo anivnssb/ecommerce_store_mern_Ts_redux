@@ -8,86 +8,58 @@ import {
   SearchQueryRequestBody,
 } from "../types/types.js";
 import { rm } from "fs";
-
-export const newProduct = TryCatch(
-  async (req: Request<{}, {}, NewProductRequestBody>, res, next) => {
-    const { name, price, category, stock } = req.body;
-    const photo = req.file;
-
-    if (!photo) return next(new ErrorHandler("Please Add Photo", 400));
-    if (!name || !price || !category || !stock) {
-      rm(photo.path, () => console.log("Photo Deleted Successfully"));
-      return next(new ErrorHandler("Please Enter All Fields", 400));
-    }
-
-    await Product.create({
-      name,
-      price,
-      stock,
-      category: category.toLowerCase(),
-      photo: photo.path,
-    });
-    res
-      .status(201)
-      .json({ success: true, message: "Product Created Successfully" });
-  }
-);
-
-export const updateProduct = TryCatch(async (req, res, next) => {
-  const { id } = req.params;
-  const { name, price, category, stock } = req.body;
-  const photo = req.file;
-
-  const product = await Product.findById(id);
-
-  if (!product) return next(new ErrorHandler("Invalid ID", 404));
-
-  if (photo) {
-    rm(product.photo, () => console.log("Old Photo Deleted Successfully"));
-    product.photo = photo.path;
-  }
-
-  if (name) product.name = name;
-  if (price) product.price = price;
-  if (stock) product.stock = stock;
-  if (category) product.category = category;
-  await product.save();
-  res
-    .status(201)
-    .json({ success: true, message: "Product Updated Successfully" });
-});
+import { myCache } from "../app.js";
+import { invalidateCache } from "../utils/features.js";
 
 export const getLatestProduct = TryCatch(async (req, res, next) => {
-  const products = await Product.find({}).sort({ createdAt: -1 }).limit(5);
+  let products;
+  if (myCache.has("latest-products")) {
+    products = JSON.parse(myCache.get("latest-products") as string);
+  } else {
+    products = await Product.find({}).sort({ createdAt: -1 }).limit(5);
+    myCache.set("latest-products", JSON.stringify(products));
+  }
+
   res.status(200).json({ success: true, products });
 });
 
 export const getAdminProduct = TryCatch(async (req, res, next) => {
-  const products = await Product.find({}).sort({ createdAt: -1 });
+  let products;
+  if (myCache.has("admin-products")) {
+    products = JSON.parse(myCache.get("admin-products") as string);
+  } else {
+    products = await Product.find({}).sort({ createdAt: -1 });
+    myCache.set("admin-products", JSON.stringify(products));
+  }
+
   res.status(200).json({ success: true, products });
 });
 
 export const getSingleProduct = TryCatch(async (req, res, next) => {
-  const product = await Product.findById(req.params.id);
+  let product;
+  const id = req.params.id;
+
+  if (myCache.has(`product-${id}`)) {
+    product = JSON.parse(myCache.get(`product-${id}`) as string);
+  } else {
+    product = await Product.findById(id);
+    myCache.set(`product-${id}`, JSON.stringify(product));
+  }
+
   if (!product) return next(new ErrorHandler("Invalid Product ID", 404));
+
   res.status(200).json({ success: true, product });
 });
 
-export const deleteProduct = TryCatch(async (req, res, next) => {
-  const product = await Product.findById(req.params.id);
-  if (!product) return next(new ErrorHandler("Invalid Product ID", 404));
-
-  rm(product.photo, () => console.log("Product Photo Deleted Successfully"));
-  await Product.deleteOne({ _id: req.params.id });
-
-  res
-    .status(200)
-    .json({ success: true, message: "Product Deleted Successfully!" });
-});
-
 export const getAllCategories = TryCatch(async (req, res, next) => {
-  console.log("cate", "categories");
-  const categories = await Product.distinct("category");
+  let categories;
+  if (myCache.has("categories")) {
+    categories = JSON.parse(myCache.get("categories") as string);
+  } else {
+    categories = await Product.distinct("category");
+    myCache.set("categories", JSON.stringify(categories));
+  }
+
   res.status(200).json({ success: true, categories });
 });
 
@@ -120,3 +92,71 @@ export const getAllProducts = TryCatch(
     res.status(200).json({ success: true, products, totalPage });
   }
 );
+
+export const deleteProduct = TryCatch(async (req, res, next) => {
+  const product = await Product.findById(req.params.id);
+  if (!product) return next(new ErrorHandler("Invalid Product ID", 404));
+
+  rm(product.photo, () => console.log("Product Photo Deleted Successfully"));
+  await Product.deleteOne({ _id: req.params.id });
+
+  await invalidateCache({ product: true });
+
+  res
+    .status(200)
+    .json({ success: true, message: "Product Deleted Successfully!" });
+});
+
+export const newProduct = TryCatch(
+  async (req: Request<{}, {}, NewProductRequestBody>, res, next) => {
+    const { name, price, category, stock } = req.body;
+    const photo = req.file;
+
+    if (!photo) return next(new ErrorHandler("Please Add Photo", 400));
+    if (!name || !price || !category || !stock) {
+      rm(photo.path, () => console.log("Photo Deleted Successfully"));
+      return next(new ErrorHandler("Please Enter All Fields", 400));
+    }
+
+    await Product.create({
+      name,
+      price,
+      stock,
+      category: category.toLowerCase(),
+      photo: photo.path,
+    });
+
+    await invalidateCache({ product: true });
+
+    res
+      .status(201)
+      .json({ success: true, message: "Product Created Successfully" });
+  }
+);
+
+export const updateProduct = TryCatch(async (req, res, next) => {
+  const { id } = req.params;
+  const { name, price, category, stock } = req.body;
+  const photo = req.file;
+
+  const product = await Product.findById(id);
+
+  if (!product) return next(new ErrorHandler("Invalid ID", 404));
+
+  if (photo) {
+    rm(product.photo, () => console.log("Old Photo Deleted Successfully"));
+    product.photo = photo.path;
+  }
+
+  if (name) product.name = name;
+  if (price) product.price = price;
+  if (stock) product.stock = stock;
+  if (category) product.category = category;
+  await product.save();
+
+  await invalidateCache({ product: true });
+
+  res
+    .status(201)
+    .json({ success: true, message: "Product Updated Successfully" });
+});

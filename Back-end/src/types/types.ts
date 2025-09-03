@@ -30,6 +30,12 @@ export interface BaseQuery {
   category?: string;
 }
 
+export interface InvalidateCacheProps {
+  product?: boolean;
+  order?: boolean;
+  admin?: boolean;
+}
+
 export type ControllerType = (
   req: Request,
   res: Response,
