@@ -14,6 +14,7 @@ export interface NewProductRequestBody {
   price: number;
   stock: number;
 }
+export interface NewOrderRequestBody {}
 
 export interface SearchQueryRequestBody {
   search?: string;
